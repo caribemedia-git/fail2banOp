@@ -1,0 +1,211 @@
+#Version1.8 Noviembre 21 2024 by Frank Portorreal
+#SE AGREGO WORDPRESS vi /etc/fail2ban/filter.d/wordpress.conf
+
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/secure
+maxretry = 3
+findtime = 600
+bantime = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+[php-url-fopen]
+enabled  = true
+port     = http,https
+filter   = php-url-fopen
+logpath  = /etc/apache2/logs/domlogs/*.*
+           /etc/apache2/logs/access_log
+maxretry = 2
+findtime = 240
+bantime  = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+
+[apache-auth]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/error_log
+			/etc/apache2/logs/domlogs/*.*
+			/etc/apache2/logs/access_log
+maxretry = 2
+findtime = 1200
+bantime  = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+
+[apache-badbots]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*   
+		/etc/apache2/logs/access_log
+maxretry = 2
+findtime = 600
+bantime  = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+[apache-noscript]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+		/etc/apache2/logs/access_log
+		/etc/apache2/logs/error_log
+maxretry = 3
+findtime = 800
+bantime  = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+[apache-overflows]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+maxretry = 2
+findtime = 800
+bantime  = 3600
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+
+[apache-nohome]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+		/etc/apache2/logs/access_log
+maxretry = 2
+findtime = 800
+bantime  = 3600
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+[apache-botsearch]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+		/etc/apache2/logs/access_log
+maxretry = 2
+findtime = 800
+bantime  = 3600
+
+[apache-fakegooglebot]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+maxretry = 1
+findtime = 600
+bantime  = 604800
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+[apache-modsecurity]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+		/etc/apache2/logs/access_log
+		/etc/apache2/logs/error_log
+maxretry = 2
+findtime = 900
+bantime  = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+
+[apache-shellshock]
+enabled  = true
+port     = http,https
+logpath  = /etc/apache2/logs/domlogs/*.*
+		/etc/apache2/logs/access_log
+maxretry = 1
+findtime = 600
+bantime  = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+[wordpress]
+enabled = true
+filter = wordpress
+logpath =  /etc/apache2/logs/domlogs/*.*
+		/var/log/secure
+		/etc/apache2/logs/access_log
+maxretry = 3
+port = http,https
+bantime = 604800
+ignoreip = 127.0.0.1,190.167.212.170,205.233.77.38,173.228.207.102,173.228.207.101
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
+
+# Fail2Ban custom JAIL for SYN_RECV attack collected by a cron periodic scan
+
+[netstat-synrecv]
+enabled  = true
+port     = http,https
+filter   = netstat_synrecv
+logpath  = /var/log/fail2ban_netstat_synrecv_flood.log
+bantime  = 604800
+# the values below doesn't matter too much if we don't want to block individual IPs
+maxretry = 3
+findtime = 60
+# incremental banning:
+bantime.increment = true
+# default factor (causes increment - 1h -> 1d 2d 4d 8d 16d 32d ...):
+bantime.factor = 24
+# max banning time = 5 week:
+bantime.maxtime = 5w
